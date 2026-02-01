@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package rchess.v1;
+
+import "common.proto";
+
+// Bishop: color and position. Also include which color square the bishop resides on
+// (light or dark) as a convenience and explicit metadata field.
+message Bishop {
+  Color color = 1;
+  Position position = 2;
+
+  // Indicates whether this is a light-squared or dark-squared bishop.
+  enum SquareColor {
+    SQUARE_COLOR_UNSPECIFIED = 0;
+    LIGHT = 1;
+    DARK = 2;
+  }
+
+  SquareColor square_color = 3;
+}

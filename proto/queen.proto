@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package rchess.v1;
+
+import "common.proto";
+
+// Queen: color and position.
+message Queen {
+  Color color = 1;
+  Position position = 2;
+}

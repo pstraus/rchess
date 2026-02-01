@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package rchess.v1;
+
+import "common.proto";
+
+// King: include color and position and castling-related flag.
+message King {
+  Color color = 1;
+  Position position = 2;
+  // Whether the king has moved (affects castling legality).
+  bool has_moved = 3;
+}

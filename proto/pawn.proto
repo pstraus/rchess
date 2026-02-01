@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package rchess.v1;
+
+import "common.proto";
+
+// Pawn: color and position plus pawn-specific state (movement, promotion, en-passant).
+message Pawn {
+  Color color = 1;
+  Position position = 2;
+  // Whether the pawn has moved (useful for two-square initial moves).
+  bool has_moved = 3;
+  // If promoted, the resulting piece type (QUEEN/ROOK/BISHOP/KNIGHT).
+  PieceType promoted_to = 4;
+  // Whether this pawn is currently vulnerable to en-passant capture.
+  bool en_passant_vulnerable = 5;
+}

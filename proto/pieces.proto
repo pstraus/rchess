@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package rchess.v1;
+
+// Wrapper proto: imports per-piece messages and exposes `Piece` and `Board`.
+import "common.proto";
+import "king.proto";
+import "queen.proto";
+import "knight.proto";
+import "bishop.proto";
+import "pawn.proto";
+
+message Piece {
+  string id = 1; // optional unique id (e.g., "wP1", "bK")
+
+  oneof kind {
+    King king = 10;
+    Queen queen = 11;
+    Knight knight = 12;
+    Bishop bishop = 13;
+    Pawn pawn = 14;
+  }
+
+  // Whether the piece is currently captured (not on-board).
+  bool captured = 20;
+}
+
+message Board {
+  repeated Piece pieces = 1;
+}
+
+// Notes:
+// - `Position.index` (in `common.proto`) should use a documented mapping (0..63).
+//   Suggested: 0 = a1, 1 = b1, ..., 7 = h1, 8 = a2, ascending files across ranks.
+// - En-passant vulnerability is intentionally part of the `Pawn` message.

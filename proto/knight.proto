@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package rchess.v1;
+
+import "common.proto";
+
+// Knight: color and position.
+message Knight {
+  Color color = 1;
+  Position position = 2;
+}

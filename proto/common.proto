@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package rchess.v1;
+
+// Common types used across piece proto files.
+
+// Generic color enumeration used by all pieces.
+enum Color {
+  COLOR_UNSPECIFIED = 0;
+  WHITE = 1;
+  BLACK = 2;
+}
+
+// Board position. Prefer structured file+rank for type-safety,
+// but include index and algebraic for convenience.
+message Position {
+  // File (column) on the board: A..H
+  enum File {
+    FILE_UNSPECIFIED = 0;
+    FILE_A = 1;
+    FILE_B = 2;
+    FILE_C = 3;
+    FILE_D = 4;
+    FILE_E = 5;
+    FILE_F = 6;
+    FILE_G = 7;
+    FILE_H = 8;
+  }
+
+  File file = 1;        // A..H
+  int32 rank = 2;       // 1..8
+  int32 index = 3;      // 0..63 (optional, row-major or agreed convention)
+  string algebraic = 4; // e.g. "e4" (optional convenience field)
+}
+
+// Common piece type enum for promotions and generic references.
+enum PieceType {
+  PIECE_TYPE_UNSPECIFIED = 0;
+  KING = 1;
+  QUEEN = 2;
+  ROOK = 3; // included for completeness
+  BISHOP = 4;
+  KNIGHT = 5;
+  PAWN = 6;
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package rchess.v1;
+
+import "common.proto";
+import "pieces.proto";
+
+// GameState represents the complete state of a chess game.
+message GameState {
+  // The current board position.
+  Board board = 1;
+
+  // Whose turn is it: 1 = White, 2 = Black.
+  int32 current_player = 2;
+
+  // Castling rights: bitmask or explicit flags per color.
+  bool white_kingside_castling = 3;
+  bool white_queenside_castling = 4;
+  bool black_kingside_castling = 5;
+  bool black_queenside_castling = 6;
+
+  // En-passant target square (if applicable after a two-square pawn move).
+  Position en_passant_target = 7;
+
+  // Half-move clock (for fifty-move rule).
+  int32 halfmove_clock = 8;
+
+  // Full-move number.
+  int32 fullmove_number = 9;
+
+  // Move history (optional, for analysis/undo).
+  repeated Move moves = 10;
+}
+
+// Move represents a single chess move.
+message Move {
+  Position from = 1;
+  Position to = 2;
+  // Promotion piece type if applicable (e.g., QUEEN after pawn reaches 8th rank).
+  int32 promotion_piece_type = 3;
+}
